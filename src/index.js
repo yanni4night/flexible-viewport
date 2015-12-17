@@ -19,13 +19,21 @@
     }
      */
 
+    var meta = document.querySelector('meta[name="viewport"]');
+    
+    if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute('name', 'viewport');
+        document.head.insertBefore(meta, document.head.childNodes[0]);
+    }
+
+    meta.setAttribute('content', 'initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no');
     var dpr = window.devicePixelRatio;
     var docEle = document.documentElement;
     var rem = baseRem * (docEle.clientWidth * dpr / baseDeviceWidth);
     var scale = 1 / dpr;
 
-    document.write('<meta name="viewport" content="initial-scale=' + scale + ', maximum-scale=' + scale +
-        ', minimum-scale=' + scale +
-        ', user-scalable=no">');
+    meta.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale +
+        ', user-scalable=no');
     document.write('<style>html{font-size:' + rem + 'px!important;}</style>');
 })();
