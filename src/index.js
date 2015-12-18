@@ -12,28 +12,28 @@
 
 (function (win) {
 
-    var semantic = {
+    const semantic = {
         'iphone6+': [818, 69],
         'iphone6': [750, 75],
         'iphone5': [640, 64],
         'iphone4': [640, 64]
     };
 
-    var viewport = win.viewport = function (baseDeviceWidth, baseRem) {
+    const viewport = win.viewport = (baseDeviceWidth, baseRem) => {
 
         var tid;
         var $meta;
         var $style;
-        var dpr = window.devicePixelRatio;
-        var scale = 1 / dpr;
-        var docEle = document.documentElement;
+        const dpr = window.devicePixelRatio;
+        const scale = 1 / dpr;
+        const docEle = document.documentElement;
 
-        var calculateRem = function () {
+        const calculateRem = () => {
             // set initial value to get the real clientWidth
             $meta.setAttribute('content',
                 'initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no');
 
-            var rem = baseRem * (docEle.clientWidth * dpr / baseDeviceWidth);
+            const rem = baseRem * (docEle.clientWidth * dpr / baseDeviceWidth);
             $style.innerHTML = 'html{font-size:' + rem + 'px!important;}';
             docEle.style.fontSize = rem + 'px';
 
@@ -41,13 +41,13 @@
                 ', minimum-scale=' + scale + ', user-scalable=no');
         };
 
-        var calculateRemDelay = function () {
+        const calculateRemDelay = () => {
             clearTimeout(tid);
             tid = setTimeout(calculateRem, 300);
         };
 
         if (1 === arguments.length) {
-            var pair = semantic[String(arguments[0]).toLowerCase()];
+            let pair = semantic[String(arguments[0]).toLowerCase()];
             if (!pair) {
                 throw new Error('Unrecognized "' + arguments[0] + '"');
             }
@@ -73,7 +73,7 @@
 
         win.addEventListener('resize', calculateRemDelay, false);
 
-        win.addEventListener('pageshow', function (e) {
+        win.addEventListener('pageshow', (e) => {
             if (e.persisted) {
                 calculateRemDelay();
             }
@@ -82,12 +82,12 @@
         if ('complete' === document.readyState) {
             document.body.style.fontSize = 12 * dpr + 'px';
         } else {
-            document.addEventListener('DOMContentLoaded', function (e) {
+            document.addEventListener('DOMContentLoaded', () => {
                 document.body.style.fontSize = 12 * dpr + 'px';
             }, false);
         }
 
-        viewport.px2rem = function (px) {
+        viewport.px2rem = (px) => {
             return px / baseRem;
         };
     };

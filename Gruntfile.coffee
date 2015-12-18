@@ -12,6 +12,8 @@ module.exports = (grunt)->
         timestamp: (require 'dateFormat')(now, 'yyyy-mm-dd HH:MM:ss Z')
         endYear: endYear
         jshint:
+            options:
+                jshintrc: '.jshintrc'
             all: ['src/index.js']
         babel:
             options:
