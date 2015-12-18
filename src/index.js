@@ -31,15 +31,16 @@
             baseRem = pair[1];
         }
 
-        var meta = document.querySelector('head meta[name="viewport"]');
+        var $meta = document.querySelector('head meta[name="viewport"]');
 
-        if (!meta) {
-            meta = document.createElement('meta');
-            meta.setAttribute('name', 'viewport');
-            document.head.insertBefore(meta, document.head.childNodes[0]);
+        if (!$meta) {
+            $meta = document.createElement('meta');
+            $meta.setAttribute('name', 'viewport');
+            document.head.appendChild($meta);
         }
+        
         // set initial value to get the real clientWidth
-        meta.setAttribute('content',
+        $meta.setAttribute('content',
             'initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no');
 
         var dpr = window.devicePixelRatio;
@@ -47,10 +48,14 @@
         var rem = baseRem * (docEle.clientWidth * dpr / baseDeviceWidth);
         var scale = 1 / dpr;
 
-        meta.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' +
+        $meta.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' +
             scale +
             ', user-scalable=no');
-        document.write('<style>html{font-size:' + rem + 'px!important;}</style>');
+
+        var $style = document.createElement('style');
+        $style.type = 'text/css';
+        $style.innerHTML = 'html{font-size:' + rem + 'px!important;}';
+        document.head.appendChild($style);
 
         viewport.px2rem = function (px) {
             return px / baseRem;
