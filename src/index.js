@@ -20,7 +20,7 @@
         'iphone4': [640, 64]
     };
 
-    win.viewport = function (baseDeviceWidth, baseRem) {
+    var viewport = win.viewport = function (baseDeviceWidth, baseRem) {
 
         if (1 === arguments.length) {
             var pair = semantic[String(arguments[0]).toLowerCase()];
@@ -51,5 +51,9 @@
             scale +
             ', user-scalable=no');
         document.write('<style>html{font-size:' + rem + 'px!important;}</style>');
+
+        viewport.px2rem = function (px) {
+            return px / baseRem;
+        };
     };
 })(window);
