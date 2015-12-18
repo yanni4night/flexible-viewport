@@ -26,8 +26,9 @@
         meta.setAttribute('name', 'viewport');
         document.head.insertBefore(meta, document.head.childNodes[0]);
     }
-
+    // set initial value to get the real clientWidth
     meta.setAttribute('content', 'initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no');
+    
     var dpr = window.devicePixelRatio;
     var docEle = document.documentElement;
     var rem = baseRem * (docEle.clientWidth * dpr / baseDeviceWidth);
