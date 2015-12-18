@@ -10,7 +10,6 @@
  * @since 1.0.0
  */
 
-;
 (function (win) {
 
     var semantic = {
