@@ -22,6 +22,31 @@
 
     var viewport = win.viewport = function (baseDeviceWidth, baseRem) {
 
+        var tid;
+        var $meta;
+        var $style;
+        var dpr = window.devicePixelRatio;
+        var scale = 1 / dpr;
+        var docEle = document.documentElement;
+
+        var calculateRem = function () {
+            // set initial value to get the real clientWidth
+            $meta.setAttribute('content',
+                'initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no');
+            
+            var rem = baseRem * (docEle.clientWidth * dpr / baseDeviceWidth);
+            $style.innerHTML = 'html{font-size:' + rem + 'px!important;}';
+            docEle.style.fontSize = rem + 'px';
+            
+            $meta.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale +
+                ', minimum-scale=' + scale + ', user-scalable=no');
+        };
+
+        var calculateRemDelay = function () {
+            clearTimeout(tid);
+            tid = setTimeout(calculateRem, 300);
+        };
+
         if (1 === arguments.length) {
             var pair = semantic[String(arguments[0]).toLowerCase()];
             if (!pair) {
@@ -31,31 +56,27 @@
             baseRem = pair[1];
         }
 
-        var $meta = document.querySelector('head meta[name="viewport"]');
+        $meta = document.querySelector('head meta[name="viewport"]');
 
         if (!$meta) {
             $meta = document.createElement('meta');
             $meta.setAttribute('name', 'viewport');
             document.head.appendChild($meta);
         }
-        
-        // set initial value to get the real clientWidth
-        $meta.setAttribute('content',
-            'initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no');
 
-        var dpr = window.devicePixelRatio;
-        var docEle = document.documentElement;
-        var rem = baseRem * (docEle.clientWidth * dpr / baseDeviceWidth);
-        var scale = 1 / dpr;
-
-        $meta.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' +
-            scale +
-            ', user-scalable=no');
-
-        var $style = document.createElement('style');
+        $style = document.createElement('style');
         $style.type = 'text/css';
-        $style.innerHTML = 'html{font-size:' + rem + 'px!important;}';
         document.head.appendChild($style);
+
+        calculateRem();
+
+        win.addEventListener('resize', calculateRemDelay, false);
+
+        win.addEventListener('pageshow', function (e) {
+            if (e.persisted) {
+                calculateRemDelay();
+            }
+        }, false);
 
         viewport.px2rem = function (px) {
             return px / baseRem;
