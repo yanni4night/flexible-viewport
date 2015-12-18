@@ -16,16 +16,12 @@ function $$(ele, style) {
     return window.getComputedStyle(ele, null)[style];
 }
 
-var assert = function () {
-    console.assert.apply(console, arguments);
-};
-
 describe('viewport', function () {
     describe('#("iphone6")', function () {
         it('should show a red div whose width/height is half of device\'s width', function () {
             var $logo = document.querySelector('.logo');
-            assert(parseInt($$($logo, 'width')) * 2 === W);
-            assert(parseInt($$($logo, 'height')) * 2 === W);
+            expect(parseInt($$($logo, 'width')) * 2).to.be(W);
+            expect(parseInt($$($logo, 'height')) * 2).to.be(W);
         });
     });
 });
