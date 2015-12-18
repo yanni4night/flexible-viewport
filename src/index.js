@@ -33,11 +33,11 @@
             // set initial value to get the real clientWidth
             $meta.setAttribute('content',
                 'initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no');
-            
+
             var rem = baseRem * (docEle.clientWidth * dpr / baseDeviceWidth);
             $style.innerHTML = 'html{font-size:' + rem + 'px!important;}';
             docEle.style.fontSize = rem + 'px';
-            
+
             $meta.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale +
                 ', minimum-scale=' + scale + ', user-scalable=no');
         };
@@ -77,6 +77,14 @@
                 calculateRemDelay();
             }
         }, false);
+
+        if ('complete' === document.readyState) {
+            document.body.style.fontSize = 12 * dpr + 'px';
+        } else {
+            document.addEventListener('DOMContentLoaded', function (e) {
+                document.body.style.fontSize = 12 * dpr + 'px';
+            }, false);
+        }
 
         viewport.px2rem = function (px) {
             return px / baseRem;
