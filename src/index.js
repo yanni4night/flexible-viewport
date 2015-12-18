@@ -56,6 +56,8 @@
             baseRem = pair[1];
         }
 
+        docEle.setAttribute('data-dpr', dpr);
+
         $meta = document.querySelector('head meta[name="viewport"]');
 
         if (!$meta) {
