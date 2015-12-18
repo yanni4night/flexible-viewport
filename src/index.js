@@ -19,7 +19,7 @@
         'iphone4': [640, 64]
     };
 
-    const viewport = win.viewport = (baseDeviceWidth, baseRem) => {
+    const viewport = win.viewport = function (baseDeviceWidth, baseRem) {
 
         var tid;
         var $meta;

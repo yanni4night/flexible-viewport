@@ -1,7 +1,6 @@
 'use strict';
 
 (function (win) {
-    var _arguments = arguments;
 
     var semantic = {
         'iphone6+': [818, 69],
@@ -34,10 +33,10 @@
             tid = setTimeout(calculateRem, 300);
         };
 
-        if (1 === _arguments.length) {
-            var pair = semantic[String(_arguments[0]).toLowerCase()];
+        if (1 === arguments.length) {
+            var pair = semantic[String(arguments[0]).toLowerCase()];
             if (!pair) {
-                throw new Error('Unrecognized "' + _arguments[0] + '"');
+                throw new Error('Unrecognized "' + arguments[0] + '"');
             }
             baseDeviceWidth = pair[0];
             baseRem = pair[1];
