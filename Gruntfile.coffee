@@ -13,11 +13,18 @@ module.exports = (grunt)->
         endYear: endYear
         jshint:
             all: ['src/index.js']
+        babel:
+            options:
+                comments: false
+                presets: ['babel-preset-es2015']
+            es2015:
+                src: 'src/index.js'
+                dest: 'viewport.js'
         uglify:
             options:
                 ASCIIOnly: true
                 banner: '/*! viewport.min.js Released v<%=pkg.version%> Build <%=timestamp%> | (C) 2014<%=endYear%> yanni4night.com | github.com/yanni4night/flexible-viewport | MIT */\n'
             dist:
-                src: 'src/index.js',
+                src: 'viewport.js',
                 dest: 'viewport.min.js'
-    grunt.registerTask 'default', ['jshint', 'uglify']
+    grunt.registerTask 'default', ['jshint', 'babel', 'uglify']
