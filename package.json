@@ -1,0 +1,24 @@
+{
+  "name": "flexible-viewport",
+  "version": "1.0.0",
+  "description": "Flexible html5 viewport for mobile.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yanni4night/flexible-viewport.git"
+  },
+  "keywords": [
+    "flexible",
+    "html5",
+    "viewport"
+  ],
+  "author": "yanni4night@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yanni4night/flexible-viewport/issues"
+  },
+  "homepage": "https://github.com/yanni4night/flexible-viewport#readme"
+}
