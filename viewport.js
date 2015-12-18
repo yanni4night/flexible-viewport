@@ -19,13 +19,10 @@
         var docEle = document.documentElement;
 
         var calculateRem = function calculateRem() {
-            $meta.setAttribute('content', 'initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no');
 
-            var rem = baseRem * (docEle.clientWidth * dpr / baseDeviceWidth);
+            var rem = baseRem * (docEle.clientWidth / baseDeviceWidth);
             $style.innerHTML = 'html{font-size:' + rem + 'px!important;}';
             docEle.style.fontSize = rem + 'px';
-
-            $meta.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
         };
 
         var calculateRemDelay = function calculateRemDelay() {
@@ -51,6 +48,8 @@
             $meta.setAttribute('name', 'viewport');
             document.head.appendChild($meta);
         }
+
+        $meta.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
 
         $style = document.createElement('style');
         $style.type = 'text/css';

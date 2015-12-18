@@ -29,16 +29,11 @@
         const docEle = document.documentElement;
 
         const calculateRem = () => {
-            // set initial value to get the real clientWidth
-            $meta.setAttribute('content',
-                'initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no');
 
-            const rem = baseRem * (docEle.clientWidth * dpr / baseDeviceWidth);
+            const rem = baseRem * (docEle.clientWidth / baseDeviceWidth);
             $style.innerHTML = 'html{font-size:' + rem + 'px!important;}';
             docEle.style.fontSize = rem + 'px';
 
-            $meta.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale +
-                ', minimum-scale=' + scale + ', user-scalable=no');
         };
 
         const calculateRemDelay = () => {
@@ -64,6 +59,10 @@
             $meta.setAttribute('name', 'viewport');
             document.head.appendChild($meta);
         }
+
+        // set initial value to get the real clientWidth
+        $meta.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale +
+                ', minimum-scale=' + scale + ', user-scalable=no');
 
         $style = document.createElement('style');
         $style.type = 'text/css';
