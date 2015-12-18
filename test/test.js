@@ -25,9 +25,13 @@ describe('viewport', function () {
             expect(parseInt($$($logo, 'height')) * 2).to.be(parseInt($$($body, 'width')));
         });
 
-        it('should set fontsize to body', function () {
+        it('should set fontsize to <body>', function () {
             var $body = document.body;
             expect(parseInt($$($body, 'fontSize'))).to.be(12 * DPR);
+        });
+
+        it('should set data-dpr to <html>', function () {
+            expect(+document.documentElement.getAttribute('data-dpr')).to.be(DPR);
         });
     });
 });
