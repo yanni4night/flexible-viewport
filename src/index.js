@@ -59,8 +59,8 @@
         }
 
         // set initial value to get the real clientWidth
-        $meta.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale +
-                ', minimum-scale=' + scale + ', user-scalable=no');
+        $meta.setAttribute('content', 'width=device-width,initial-scale=' + scale + ', maximum-scale=' + scale +
+                ', minimum-scale=' + scale + ', user-scalable=no, shrink-to-fit=no');
 
         $style = document.createElement('style');
         $style.type = 'text/css';
