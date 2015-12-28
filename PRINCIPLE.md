@@ -19,7 +19,7 @@
 
 设该设备上 \<html \> 的 _font-size_ 为 `foo_fs`。则
 
-    foo_rem = x_w/foo_fs  -----------(3)
+    foo_rem = x_w / foo_fs  -----------(3)
 
 将(1)、(3)代入(2)，得：
 
@@ -36,13 +36,13 @@
     ue_w=375px
     foo_w=414px
     psd_rem=2.5rem
-    foo_fs=69px 
+    foo_fs=69px
 
 则：
 
-    foo_rem=2.5 * (75/69) * (414/375)=3rem
+    foo_rem=2.5 * (75 / 69) * (414 / 375)=3rem
 即：
     
-    3rem = 3* 69 = 207 = 414/2
+    3rem = 3 * 69 = 207 = 414 / 2
 
 因此，在 `scale` 设为_1_的条件下，实现与UE图同比例的排版，与 dpr 并无关系。
